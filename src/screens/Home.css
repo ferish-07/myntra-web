@@ -1,0 +1,9 @@
+.desktop-pSearchTitle {
+    position: absolute;
+    margin-top: -15px;
+    background: #fafbfc;
+    padding-right: 10px;
+    color: #282c3f;
+    font-size: 12px;
+    font-weight: 700;
+}
