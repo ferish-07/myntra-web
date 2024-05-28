@@ -7,7 +7,7 @@ import NewRoutes from "./screens/NewRoutes";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <NewRoutes />
       </Router>
     </div>
