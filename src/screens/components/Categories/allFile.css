@@ -1,0 +1,17 @@
+.text{
+    color: black;
+}
+.boxView{
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    flex-basis: 200;
+    /* flex-grow: 1; */
+}
+
+.buttonView{
+    margin-top: 25px;
+    justify-content: flex-end;
+    display: flex;
+}

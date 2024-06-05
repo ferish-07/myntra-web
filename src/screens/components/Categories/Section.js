@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { API_ADD_SECTION } from "../../redux/Urls";
 import { AddSectionAction } from "../../redux/action/CategoryAction";
+import { ListItemText } from "@mui/material";
+import "./allFile.css";
+import { Dropdown } from "../Dropdown";
 const Section = ({ categoryArray, callMainAPi }) => {
   const dispatch = useDispatch();
   const { addSectionResponse } = useSelector((store) => store.CategoryReducers);
@@ -24,17 +29,16 @@ const Section = ({ categoryArray, callMainAPi }) => {
       callMainAPi();
     }
   }, [addSectionResponse]);
+  const handleDelete = (event, id) => {
+    event.stopPropagation();
+    console.log("----idddddd-", id);
+  };
   const onSubmit = () => {
     let params = {
       category_id: categoryValue.category_id,
       section_name: sectionName,
       column_number: columnNo.value,
     };
-
-    console.log(
-      "-----------------------------------------PARAMS-----------",
-      params
-    );
 
     let url = API_ADD_SECTION;
     dispatch(AddSectionAction(url, params));
@@ -80,53 +84,34 @@ const Section = ({ categoryArray, callMainAPi }) => {
   return (
     <div
       style={{
-        // width: "25%",
-
-        borderRadius: 5,
-        boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-        border: "1px solid rgba(0,0,0,0.1)",
-        padding: 15,
+        flexGrow: 0.3,
+        margin: 10,
       }}
+      className="boxView"
     >
-      <text style={{ color: "black" }}>Section Card</text>
-      <div style={{ marginTop: 25 }}>
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          helperText="Please select Category"
-          size="small"
-          onChange={(i) => console.log("--------------", i)}
-        >
-          {categoryArray.map((option) => (
-            <MenuItem
-              key={option.category_id}
-              value={option.category_id}
-              onClick={() => setCategoryValue(option)}
-            >
-              {option.category_name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          helperText="Please select Column No"
-          size="small"
-          onChange={(i) => console.log("--------------", i)}
-          style={{ marginLeft: 20 }}
-        >
-          {column_no.map((option) => (
-            <MenuItem
-              key={option.id}
-              value={option.value}
-              onClick={() => setColumnNo(option)}
-            >
-              {option.value}
-            </MenuItem>
-          ))}
-        </TextField>
+      <text className="text">Section Card</text>
+      <div
+        style={{
+          marginTop: 25,
+          justifyContent: "space-around",
+          display: "flex",
+        }}
+      >
+        <Dropdown
+          isRightIcon={true}
+          itemArray={categoryArray}
+          key={"category_id"}
+          value={"category_name"}
+          onClick={(option) => setCategoryValue(option)}
+          handleRightIconPress={(event, option) => handleDelete(event, option)}
+        />
+        <Dropdown
+          isRightIcon={false}
+          itemArray={column_no}
+          key={"id"}
+          value={"value"}
+          onClick={(option) => setColumnNo(option)}
+        />
       </div>
 
       <div style={{ marginTop: 25 }}>
@@ -139,9 +124,7 @@ const Section = ({ categoryArray, callMainAPi }) => {
         />
       </div>
 
-      <div
-        style={{ marginTop: 25, justifyContent: "flex-end", display: "flex" }}
-      >
+      <div className="buttonView">
         <Button variant="contained" size="small" style={{ marginRight: 5 }}>
           Reset
         </Button>

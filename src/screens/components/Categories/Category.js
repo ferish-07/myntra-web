@@ -9,6 +9,8 @@ import {
   resetAction,
 } from "../../redux/action/CategoryAction";
 import { ALL_SECTION } from "../../redux/store/Types";
+import Brand from "./Brand";
+import { AddItemCard } from "./AddItemCard";
 
 const Category = () => {
   const { allSectionData } = useSelector((store) => store.CategoryReducers);
@@ -51,6 +53,7 @@ const Category = () => {
           flexDirection: "row",
           display: "flex",
           justifyContent: "space-around",
+          flexWrap: "wrap",
         }}
       >
         <MainCategoryCard callMainAPi={callMainAPi} />
@@ -61,7 +64,13 @@ const Category = () => {
           allData={AllSectionData}
           callMainAPi={callMainAPi}
         />
+        <Brand callMainAPi={callMainAPi} />
       </div>
+      <AddItemCard
+        categoryArray={categoryArray}
+        callMainAPi={callMainAPi}
+        allData={AllSectionData}
+      />
     </div>
   );
 };

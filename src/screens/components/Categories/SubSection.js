@@ -3,9 +3,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useDispatch, useSelector } from "react-redux";
-import { InputLabel, Select } from "@mui/material";
+
 import { API_ADD_SUB_SECTION } from "../../redux/Urls";
 import { AddSubSectionAction } from "../../redux/action/CategoryAction";
+import "./allFile.css";
+import { Dropdown } from "../Dropdown";
 
 const SubSection = ({ categoryArray, allData, callMainAPi }) => {
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ const SubSection = ({ categoryArray, allData, callMainAPi }) => {
     }
   }, [addSubSectionResponse]);
   const changeCategory = (event) => {
-    console.log("---------------------irttt--", event);
+    console.log("---------------------irttt--", event, allData);
     setCategoryValue(event.category_id);
     setSectionArray([]);
     allData.map((i) => {
@@ -58,68 +60,58 @@ const SubSection = ({ categoryArray, allData, callMainAPi }) => {
     dispatch(AddSubSectionAction(url, params));
     console.log("==========================", params);
   };
+  const handleDelete = (event, id) => {
+    event.stopPropagation();
+    console.log("----idddddd-", id);
+  };
+
   return (
     <div
       style={{
-        // width: "25%",
-
-        borderRadius: 5,
-        boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-        border: "1px solid rgba(0,0,0,0.1)",
-        padding: 15,
+        flexGrow: 0.2,
+        margin: 10,
       }}
+      className="boxView"
     >
-      <text style={{ color: "black" }}>Sub Section Card</text>
+      <text className="text">Sub Section Card</text>
       <div
         style={{
+          justifyContent: "center",
+          alignItems: "center",
           display: "flex",
           marginTop: 25,
-          width: "40ch",
-
-          justifyContent: "space-around",
-          flex: 1,
         }}
       >
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          helperText="Please select Category"
-          size="small"
-          value={categoryValue}
-          // onChange={setCategoryValue}
-          onSelect={(i) => console.log("------------", i)}
-          style={{ width: "45%" }}
+        <div
+          style={{
+            display: "flex",
+            width: "40ch",
+
+            justifyContent: "space-between",
+            flex: 1,
+          }}
         >
-          {categoryArray.map((option) => (
-            <MenuItem
-              key={option.category_id}
-              value={option.category_id}
-              onClick={() => changeCategory(option)}
-            >
-              {option.category_name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          helperText="Please select Section"
-          size="small"
-          style={{ width: "45%" }}
-          disabled={categoryValue == "" ? true : false}
-        >
-          {sectionArray.map((option) => (
-            <MenuItem
-              key={option.section_id}
-              value={option.section_id}
-              onClick={() => changeSection(option)}
-            >
-              {option.section_name}
-            </MenuItem>
-          ))}
-        </TextField>
+          <Dropdown
+            // isRightIcon={true}
+            itemArray={categoryArray}
+            key={"category_id"}
+            value={"category_name"}
+            onClick={(option) => changeCategory(option)}
+            textFieldstyle={{ width: "45%" }}
+            // handleRightIconPress={(event, option) => handleDelete(event, option)}
+          />
+          <Dropdown
+            isRightIcon={true}
+            itemArray={sectionArray}
+            key={"section_id"}
+            value={"section_name"}
+            onClick={(option) => changeSection(option)}
+            textFieldstyle={{ width: "45%" }}
+            handleRightIconPress={(event, option) =>
+              handleDelete(event, option)
+            }
+          />
+        </div>
       </div>
 
       <div style={{ marginTop: 25 }}>
@@ -133,9 +125,7 @@ const SubSection = ({ categoryArray, allData, callMainAPi }) => {
         />
       </div>
 
-      <div
-        style={{ marginTop: 25, justifyContent: "flex-end", display: "flex" }}
-      >
+      <div className="buttonView">
         <Button variant="contained" size="small" style={{ marginRight: 5 }}>
           Reset
         </Button>

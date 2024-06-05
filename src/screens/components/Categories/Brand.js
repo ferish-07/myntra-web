@@ -6,35 +6,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { mainCategoryAction } from "../../redux/action/CategoryAction";
 import "./allFile.css";
 
-const MainCategoryCard = ({ callMainAPi }) => {
+const Brand = ({ callMainAPi }) => {
   const dispatch = useDispatch();
-  const [mainCategory, setMainCategory] = useState("");
+  const [brandName, setbrandName] = useState("");
   const { addMainCategoryData } = useSelector(
     (store) => store.CategoryReducers
   );
 
-  useEffect(() => {
-    if (addMainCategoryData) {
-      console.log("----addMainCategoryData---------", addMainCategoryData);
-      if (!addMainCategoryData.error_status) {
-        alert(addMainCategoryData.message);
-        callMainAPi();
-      }
-    }
-  }, [addMainCategoryData]);
+  //   useEffect(() => {
+  //     if (addMainCategoryData) {
+  //       console.log("----addMainCategoryData---------", addMainCategoryData);
+  //       if (!addMainCategoryData.error_status) {
+  //         alert(addMainCategoryData.message);
+  //         callMainAPi();
+  //       }
+  //     }
+  //   }, [addMainCategoryData]);
 
   const AddCategory = () => {
-    let url = API_ADD_MAIN_CATEGORY;
+    // let url = API_ADD_MAIN_CATEGORY;
     let params = {
-      category_name: mainCategory,
+      brand_name: brandName,
     };
 
-    console.log("-------------------------", url, params);
-    dispatch(mainCategoryAction(url, params));
+    console.log("-------------------------", params);
+    // dispatch(mainCategoryAction(url, params));
   };
 
   const onReset = () => {
-    setMainCategory("");
+    setbrandName("");
   };
   return (
     <div
@@ -45,15 +45,15 @@ const MainCategoryCard = ({ callMainAPi }) => {
       }}
       className="boxView"
     >
-      <text className="text">Main Category Card</text>
+      <text className="text">Brand Card</text>
       <div style={{ marginTop: 25 }}>
         <TextField
           id="outlined-basic"
-          label="Category"
+          label="Brand"
           variant="outlined"
           size="small"
-          value={mainCategory}
-          onChange={(e) => setMainCategory(e.target.value)}
+          value={brandName}
+          onChange={(e) => setbrandName(e.target.value)}
         />
       </div>
 
@@ -74,4 +74,4 @@ const MainCategoryCard = ({ callMainAPi }) => {
   );
 };
 
-export default MainCategoryCard;
+export default Brand;
