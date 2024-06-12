@@ -13,13 +13,16 @@ export const Dropdown = ({
   isRightIcon,
   handleRightIconPress,
   textFieldstyle,
+  helperText,
+  label,
 }) => {
   return (
     <TextField
       id="outlined-select-currency"
       select
-      label="Select"
-      helperText="Please select Category"
+      defaultValue=""
+      label={label ? label : "Select"}
+      helperText={helperText ? helperText : ""}
       size="small"
       SelectProps={{
         renderValue: (selected) => selected,

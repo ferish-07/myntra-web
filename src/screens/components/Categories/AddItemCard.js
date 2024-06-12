@@ -2,19 +2,28 @@ import React, { useState } from "react";
 import "./allFile.css";
 import { Dropdown } from "../Dropdown";
 import { MultiSelectDropDown } from "../MultiSelectDropDown";
-import { TextField } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
 export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
   const [sectionArray, setSectionArray] = useState([]);
   const [subSectionArray, setSubSectionArray] = useState([]);
   const [categoryValue, setCategoryValue] = useState("");
   const [SectionValue, setSectionValue] = useState("");
+  const [SubSectionValue, setSubSectionValue] = useState("");
+  const [brandValue, setBrandValue] = useState("");
+  const [sizeList, setSizeList] = useState("");
+  const [discountedPrice, setdiscountedPrice] = useState(null);
+  const [productName, setproductName] = useState(null);
+  const [dicPer, setDicPer] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [imageLink, setImageLink] = useState(null);
+  const [imageArray, setImageArray] = useState([]);
   const [brandArray, setBrandArray] = useState([
     { brand_id: 101, brand_name: "PUMA" },
   ]);
   const changeCategory = (event) => {
     console.log("---------------------irttt--", event, allData);
-    setCategoryValue(event.category_id);
+    setCategoryValue(event);
     setSectionArray([]);
     allData.map((i) => {
       if (i.category_id == event.category_id) {
@@ -31,10 +40,10 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
   };
   const changeSection = (event) => {
     console.log("--------------CHNAGE SECRTIUON----", event);
-    setSectionValue(event.section_id);
+    setSectionValue(event);
     setSubSectionArray([]);
     allData.map((i) => {
-      if (i.category_id == categoryValue) {
+      if (i.category_id == categoryValue.category_id) {
         i.sections.map((i2) => {
           if (i2.section_id == event.section_id) {
             let sub_section_array = [];
@@ -52,12 +61,69 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
   };
   const changeSubSection = (option) => {
     console.log("---Sub-", option);
+    setSubSectionValue(option);
   };
   const changeBrand = (option) => {
     console.log("---Sub-", option);
+    setBrandValue(option);
   };
   const changeSize = (option) => {
     console.log("---Sub-", option);
+    setSizeList(option);
+  };
+  const discountedFunc = (val) => {
+    setdiscountedPrice(val);
+    console.log("====PRRRRRR", price);
+    let percent;
+    if (price) {
+      percent = (100 * (price - val)) / price;
+      setDicPer(percent);
+    }
+    // else {
+    //   let Price = (100 * val) / 100 - dicPer;
+    //   console.log("--calculated Price--", Price);
+    //   setPrice(Price);
+    // }
+  };
+  const constChangeInPrice = (val) => {
+    setPrice(val);
+    let disc;
+    if (dicPer) {
+      disc = val - (val * dicPer) / 100;
+      setdiscountedPrice(disc);
+    }
+  };
+  const changeDisPer = (val) => {
+    setDicPer(val);
+    let disc;
+    if (price) {
+      disc = price - (price * val) / 100;
+      console.log(disc, "--------DICCC");
+      setdiscountedPrice(disc);
+    }
+  };
+
+  const ImageAddFunction = () => {
+    let arr = [...imageArray, imageLink];
+    console.log("---IMAGE ARRA-", arr);
+    setImageArray(arr);
+    // imageArray.push([imageLink]);
+  };
+
+  const SubmitFunction = () => {
+    let params = {
+      category: categoryValue,
+      section: SectionValue,
+      subSection: SubSectionValue,
+      brand: brandValue,
+      size: sizeList,
+      product_name: productName,
+      price: price,
+      discount_amount: discountedPrice,
+      discount_percentage: dicPer,
+      image_list: imageArray,
+    };
+    console.log("--PARAMNS-", JSON.stringify(params));
   };
   return (
     <div
@@ -84,7 +150,8 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           key={"category_id"}
           value={"category_name"}
           onClick={(option) => changeCategory(option)}
-          textFieldstyle={{ margin: 5 }}
+          textFieldstyle={{ margin: 5, flex: 1 }}
+          label={"Category"}
         />
 
         <Dropdown
@@ -92,7 +159,8 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           key={"section_id"}
           value={"section_name"}
           onClick={(option) => changeSection(option)}
-          textFieldstyle={{ margin: 5 }}
+          textFieldstyle={{ margin: 5, flex: 1 }}
+          label={"Section"}
         />
 
         <Dropdown
@@ -100,7 +168,8 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           key={"sub_section_id"}
           value={"sub_section_name"}
           onClick={(option) => changeSubSection(option)}
-          textFieldstyle={{ margin: 5 }}
+          textFieldstyle={{ margin: 5, flex: 1 }}
+          label={"Sub Section"}
         />
       </div>
       <div
@@ -108,23 +177,21 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           marginTop: 25,
           justifyContent: "space-around",
           display: "flex",
-          flex: 1,
         }}
       >
-        <div style={{ flex: 1 }}>
-          <Dropdown
-            itemArray={brandArray}
-            key={"brand_id"}
-            value={"brand_name"}
-            onClick={(option) => changeBrand(option)}
-            // textFieldstyle={{ width: "45%" }}
-          />
-        </div>
+        <Dropdown
+          itemArray={brandArray}
+          key={"brand_id"}
+          value={"brand_name"}
+          onClick={(option) => changeBrand(option)}
+          textFieldstyle={{ flex: 1, margin: 5 }}
+          label={"Brand"}
+        />
 
         <MultiSelectDropDown
           itemArray={["XS", "S", "M", "L", "XL", "XXL", "XXXL"]}
           onClick={(option) => changeSize(option)}
-          textFieldstyle={{ width: "45%" }}
+          style={{ flex: 1, margin: 5 }}
         />
       </div>
       <div
@@ -142,8 +209,9 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           variant="outlined"
           size="small"
           style={{ flex: 1, margin: 5 }}
+          value={productName}
           // disabled={categoryValue == "" && SectionValue == "" ? true : false}
-          // onChange={(e) => setSubSectionValue(e.target.value)}
+          onChange={(e) => setproductName(e.target.value)}
         />
 
         <TextField
@@ -152,20 +220,82 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           variant="outlined"
           size="small"
           style={{ flex: 1, margin: 5 }}
+          InputLabelProps={{ shrink: !!price }}
+          value={price}
           // disabled={categoryValue == "" && SectionValue == "" ? true : false}
-          // onChange={(e) => setSubSectionValue(e.target.value)}
+          onChange={(e) => constChangeInPrice(e.target.value)}
         />
 
         <TextField
           id="outlined-basic"
-          label="Discount"
+          label="Discount %"
           variant="outlined"
           size="small"
           style={{ flex: 1, margin: 5 }}
+          InputLabelProps={{ shrink: !!dicPer }}
+          value={dicPer}
           // disabled={categoryValue == "" && SectionValue == "" ? true : false}
-          // onChange={(e) => setSubSectionValue(e.target.value)}
+          onChange={(e) => changeDisPer(e.target.value)}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Dsc Price"
+          InputLabelProps={{ shrink: !!discountedPrice }}
+          variant="outlined"
+          size="small"
+          style={{ flex: 1, margin: 5 }}
+          value={discountedPrice}
+          // disabled={categoryValue == "" && SectionValue == "" ? true : false}
+          onChange={(e) => discountedFunc(e.target.value)}
         />
       </div>
+      <div style={{ marginTop: 25 }}>
+        {imageArray.map((i) => {
+          return (
+            <img src={i} style={{ width: 80, marginRight: 5, marginTop: 5 }} />
+          );
+        })}
+      </div>
+      <div
+        style={{
+          marginTop: 20,
+          justifyContent: "space-around",
+          display: "flex",
+          flex: 1,
+          alignItems: "center",
+          // flexWrap: "wrap",
+        }}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Image Link"
+          InputLabelProps={{ shrink: !!imageLink }}
+          variant="outlined"
+          size="small"
+          style={{ flex: 1, margin: 5 }}
+          value={imageLink}
+          // disabled={categoryValue == "" && SectionValue == "" ? true : false}
+          onChange={(e) => setImageLink(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          size="small"
+          style={{ height: 30, borderRadius: 100 }}
+          disabled={imageLink && imageLink.length == 0}
+          onClick={() => ImageAddFunction()}
+        >
+          Add
+        </Button>
+      </div>
+      <Button
+        variant="contained"
+        size="small"
+        // style={{ height: 30, borderRadius: 100 }}
+        // disabled={imageLink && imageLink.length == 0}
+        onClick={() => SubmitFunction()}
+      >
+        SUBMIT
+      </Button>
     </div>
   );
 };

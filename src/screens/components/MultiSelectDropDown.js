@@ -18,7 +18,7 @@ const MenuProps = {
   },
 };
 
-export const MultiSelectDropDown = ({ itemArray, onClick }) => {
+export const MultiSelectDropDown = ({ itemArray, onClick, style }) => {
   const [itemName, setItemName] = useState([]);
 
   const handleChange = (event) => {
@@ -32,7 +32,7 @@ export const MultiSelectDropDown = ({ itemArray, onClick }) => {
     onClick(value);
   };
   return (
-    <div style={{ flex: 1 }}>
+    <div style={style}>
       <FormControl sx={{ width: "100%" }}>
         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
         <Select
