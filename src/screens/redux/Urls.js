@@ -1,6 +1,6 @@
 export const API_REGISTER =
   "https://myntra-backend-five.vercel.app/api/auth/register";
-// https://myntra-backend-five.vercel.app/api/categories/getSectionData
+
 export const API_ADD_MAIN_CATEGORY =
   "https://myntra-backend-five.vercel.app/api/categories/add/main/category";
 

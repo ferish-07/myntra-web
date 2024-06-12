@@ -7,6 +7,9 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 15px;
     flex-basis: 200;
+    flex: 1 1 100%;
+        /* Default to full width */
+    max-width: 350px;
     /* flex-grow: 1; */
 }
 
@@ -14,4 +17,28 @@
     margin-top: 25px;
     justify-content: flex-end;
     display: flex;
+}
+
+.add-item-card {
+    flex: 1 1 50%;
+
+    /* Take 50% of the width */
+}
+
+@media (max-width: 768px) {
+    .add-item-card {
+        flex: 1 1 100%;
+        /* Full width on small screens */
+    }
+}
+
+.responsive-dropdown {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .responsive-dropdown {
+        width: 45%;
+        /* Adjust this percentage as needed */
+    }
 }

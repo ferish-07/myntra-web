@@ -52,7 +52,7 @@ const Category = () => {
           padding: 20,
           flexDirection: "row",
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "center",
           flexWrap: "wrap",
         }}
       >
@@ -66,6 +66,7 @@ const Category = () => {
         />
         <Brand callMainAPi={callMainAPi} />
       </div>
+
       <AddItemCard
         categoryArray={categoryArray}
         callMainAPi={callMainAPi}

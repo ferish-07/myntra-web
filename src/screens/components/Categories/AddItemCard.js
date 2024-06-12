@@ -63,16 +63,20 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
     <div
       style={{
         margin: 30,
-        width: "40%",
+        maxWidth: "500px",
+        // flexGrow: 1,
+        // width: "40%",
       }}
-      className="boxView"
+      className="add-item-card boxView"
     >
       <h5 className="text">AddItemCard</h5>
       <div
         style={{
-          marginTop: 25,
+          marginTop: 20,
           justifyContent: "space-around",
           display: "flex",
+          // flexWrap: "wrap",
+          // flex: 1,
         }}
       >
         <Dropdown
@@ -80,21 +84,23 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           key={"category_id"}
           value={"category_name"}
           onClick={(option) => changeCategory(option)}
-          textFieldstyle={{ width: "45%" }}
+          textFieldstyle={{ margin: 5 }}
         />
+
         <Dropdown
           itemArray={sectionArray}
           key={"section_id"}
           value={"section_name"}
           onClick={(option) => changeSection(option)}
-          textFieldstyle={{ width: "45%" }}
+          textFieldstyle={{ margin: 5 }}
         />
+
         <Dropdown
           itemArray={subSectionArray}
           key={"sub_section_id"}
           value={"sub_section_name"}
           onClick={(option) => changeSubSection(option)}
-          textFieldstyle={{ width: "45%" }}
+          textFieldstyle={{ margin: 5 }}
         />
       </div>
       <div
@@ -102,25 +108,60 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           marginTop: 25,
           justifyContent: "space-around",
           display: "flex",
+          flex: 1,
         }}
       >
-        <Dropdown
-          itemArray={brandArray}
-          key={"brand_id"}
-          value={"brand_name"}
-          onClick={(option) => changeBrand(option)}
-          textFieldstyle={{ width: "45%" }}
-        />
+        <div style={{ flex: 1 }}>
+          <Dropdown
+            itemArray={brandArray}
+            key={"brand_id"}
+            value={"brand_name"}
+            onClick={(option) => changeBrand(option)}
+            // textFieldstyle={{ width: "45%" }}
+          />
+        </div>
+
         <MultiSelectDropDown
           itemArray={["XS", "S", "M", "L", "XL", "XXL", "XXXL"]}
           onClick={(option) => changeSize(option)}
           textFieldstyle={{ width: "45%" }}
         />
+      </div>
+      <div
+        style={{
+          marginTop: 20,
+          justifyContent: "space-around",
+          display: "flex",
+          flex: 1,
+          // flexWrap: "wrap",
+        }}
+      >
         <TextField
           id="outlined-basic"
           label="Name of Product"
           variant="outlined"
           size="small"
+          style={{ flex: 1, margin: 5 }}
+          // disabled={categoryValue == "" && SectionValue == "" ? true : false}
+          // onChange={(e) => setSubSectionValue(e.target.value)}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Price of Product"
+          variant="outlined"
+          size="small"
+          style={{ flex: 1, margin: 5 }}
+          // disabled={categoryValue == "" && SectionValue == "" ? true : false}
+          // onChange={(e) => setSubSectionValue(e.target.value)}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Discount"
+          variant="outlined"
+          size="small"
+          style={{ flex: 1, margin: 5 }}
           // disabled={categoryValue == "" && SectionValue == "" ? true : false}
           // onChange={(e) => setSubSectionValue(e.target.value)}
         />

@@ -32,8 +32,8 @@ export const MultiSelectDropDown = ({ itemArray, onClick }) => {
     onClick(value);
   };
   return (
-    <div>
-      <FormControl sx={{ width: 250 }}>
+    <div style={{ flex: 1 }}>
+      <FormControl sx={{ width: "100%" }}>
         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
