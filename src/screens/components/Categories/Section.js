@@ -95,6 +95,8 @@ const Section = ({ categoryArray, callMainAPi }) => {
           marginTop: 25,
           justifyContent: "space-around",
           display: "flex",
+          flex: 1,
+          // backgroundColor:
         }}
       >
         <Dropdown
@@ -104,6 +106,7 @@ const Section = ({ categoryArray, callMainAPi }) => {
           value={"category_name"}
           onClick={(option) => setCategoryValue(option)}
           handleRightIconPress={(event, option) => handleDelete(event, option)}
+          textFieldstyle={{ margin: 5, flex: 1 }}
         />
         <Dropdown
           isRightIcon={false}
@@ -111,6 +114,7 @@ const Section = ({ categoryArray, callMainAPi }) => {
           key={"id"}
           value={"value"}
           onClick={(option) => setColumnNo(option)}
+          textFieldstyle={{ margin: 5, flex: 1 }}
         />
       </div>
 

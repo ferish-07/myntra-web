@@ -65,13 +65,12 @@ const Category = () => {
           callMainAPi={callMainAPi}
         />
         <Brand callMainAPi={callMainAPi} />
+        <AddItemCard
+          categoryArray={categoryArray}
+          callMainAPi={callMainAPi}
+          allData={AllSectionData}
+        />
       </div>
-
-      <AddItemCard
-        categoryArray={categoryArray}
-        callMainAPi={callMainAPi}
-        allData={AllSectionData}
-      />
     </div>
   );
 };

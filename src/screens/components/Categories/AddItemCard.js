@@ -3,6 +3,7 @@ import "./allFile.css";
 import { Dropdown } from "../Dropdown";
 import { MultiSelectDropDown } from "../MultiSelectDropDown";
 import { TextField, Button } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
   const [sectionArray, setSectionArray] = useState([]);
@@ -110,6 +111,15 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
     // imageArray.push([imageLink]);
   };
 
+  const deleteImage = (index) => {
+    const newArray = [
+      ...imageArray.slice(0, index), // Elements before the one to delete
+      ...imageArray.slice(index + 1), // Elements after the one to delete
+    ];
+    console.log("--dsdsdsdsdsd-", newArray);
+    setImageArray(newArray);
+  };
+
   const SubmitFunction = () => {
     let params = {
       category: categoryValue,
@@ -130,6 +140,7 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
       style={{
         margin: 30,
         maxWidth: "500px",
+        flexGrow: 0.3,
         // flexGrow: 1,
         // width: "40%",
       }}
@@ -249,10 +260,44 @@ export const AddItemCard = ({ callMainAPi, allData, categoryArray }) => {
           onChange={(e) => discountedFunc(e.target.value)}
         />
       </div>
-      <div style={{ marginTop: 25 }}>
-        {imageArray.map((i) => {
+      <div
+        style={{
+          marginTop: 25,
+          flexDirection: "row",
+          display: "flex",
+          overflow: "auto",
+        }}
+      >
+        {imageArray.map((i, index) => {
           return (
-            <img src={i} style={{ width: 80, marginRight: 5, marginTop: 5 }} />
+            <div
+              style={{
+                display: "flex",
+                // position: "absolute",
+                // // justifyContent: "center",
+                // flexDirection: "row",
+                // // alignItems: "center",
+              }}
+            >
+              <img
+                src={i}
+                style={{ width: 80, marginRight: 5, marginTop: 5 }}
+              />
+              <CloseIcon
+                style={{
+                  backgroundColor: "grey",
+                  // right: ,
+                  // position: "absolute",
+                  width: 20,
+                  height: 20,
+                  borderRadius: 100,
+                  // right: 800,
+
+                  // top: "1px",
+                }}
+                onClick={() => deleteImage(index)}
+              />
+            </div>
           );
         })}
       </div>
