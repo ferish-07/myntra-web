@@ -18,7 +18,6 @@ const Category = () => {
   const [AllSectionData, setAllSectionData] = useState([]);
   useEffect(() => {
     if (allSectionData) {
-      console.log("-----allSectionData--------", allSectionData);
       let category_array = [];
       if (!allSectionData.error_status && allSectionData.data) {
         setAllSectionData(allSectionData.data);

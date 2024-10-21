@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'customFonts';
+    src: url('./myntra.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'customFontss';
+    src: url('./myntra.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.custom-font {
+    font-family: 'customFonts';
+    /* Use in specific elements */
+}

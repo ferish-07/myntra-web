@@ -312,36 +312,26 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    console.log(
-      "-----------------allSectionData------------------------------",
-      JSON.stringify(allSectionData?.data)
-    );
-    if (allSectionData) {
-      if (!allSectionData.error_status && allSectionData?.data) {
-        let arr = allSectionData?.data;
+    if (navbarData) {
+      // if (!allSectionData.error_status && allSectionData?.data) {
+      // let arr = allSectionData?.data;
+      let arr = navbarData;
 
-        arr.map((i) => {
-          let arr = [];
-          i.sections.map((i2) => {
-            arr.push(i2.column_no);
-            i.parts = [...new Set(arr)];
-          });
+      arr.map((i) => {
+        let arr = [];
+        i.sections.map((i2) => {
+          arr.push(i2.column_no);
+          i.parts = [...new Set(arr)];
         });
+      });
 
-        setNewData(arr);
-        console.log("-----ddd------", JSON.stringify(arr));
-      }
+      setNewData(arr);
+      // }
     }
-  }, [allSectionData]);
+  }, [navbarData]);
 
   return (
-    <nav
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 999,
-      }}
-    >
+    <nav className="w-full flex justify-between items-center navbar">
       <div
         style={{
           width: "5%",
@@ -396,13 +386,6 @@ const Navbar = () => {
                                       // >
                                       <li
                                         onClick={() => {
-                                          console.log(
-                                            "-----ssdsdsdsdsddsdsdsd-------",
-                                            `${i.category_name.toLowerCase()}/${i4.sub_section_name
-                                              .replaceAll(" ", "")
-                                              .replace("-", "")
-                                              .toLowerCase()}`
-                                          );
                                           navigateTo(
                                             `/${i.category_name.toLowerCase()}/${i4.sub_section_name
                                               .replaceAll(" ", "")
