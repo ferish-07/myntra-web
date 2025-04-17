@@ -29,14 +29,19 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
-html, body {
+
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: Assistant, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica, Arial, sans-serif !important;
 }
 
 #full-height-element {

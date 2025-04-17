@@ -1,0 +1,21 @@
+.vertical-filters-header {
+  font-weight: 700;
+  /* text-transform: uppercase; */
+  font-size: 14px;
+  /* margin: 0 0 18px; */
+  /* clear: both; */
+  color: #282c3f;
+  /* display: block; */
+}
+.vertical-filters-label {
+  /* display: block; */
+  /* width: 95%; */
+  font-size: 14px;
+
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* min-height: 17px; */
+  color: #282c3f;
+}

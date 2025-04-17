@@ -312,9 +312,27 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    console.log(
+      "-----------------a l l S e c t i o n D a ta------------------------------",
+      JSON.stringify(allSectionData?.data)
+    );
+    // if (allSectionData) {
+    //   if (!allSectionData.error_status && allSectionData?.data) {
+    //     let arr = allSectionData?.data;
+
+    //     arr.map((i) => {
+    //       let arr = [];
+    //       i.sections.map((i2) => {
+    //         arr.push(i2.column_no);
+    //         i.parts = [...new Set(arr)];
+    //       });
+    //     });
+
+    //     setNewData(arr);
+    //     console.log("-----ddd------", JSON.stringify(arr));
+    //   }
+    // }
     if (navbarData) {
-      // if (!allSectionData.error_status && allSectionData?.data) {
-      // let arr = allSectionData?.data;
       let arr = navbarData;
 
       arr.map((i) => {
@@ -326,15 +344,15 @@ const Navbar = () => {
       });
 
       setNewData(arr);
-      // }
     }
   }, [navbarData]);
 
   return (
     <nav className="w-full flex justify-between items-center navbar">
       <div
+        className="w-[15%] lg:w-[5%]"
         style={{
-          width: "5%",
+          // width: "5%",
           justifyContent: "center",
           display: "flex",
         }}

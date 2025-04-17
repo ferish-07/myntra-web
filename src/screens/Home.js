@@ -18,10 +18,14 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+      <div class="container-fluid border text-primary">100% wide until small breakpoint</div>
+<div class="container-md text-primary border">100% wide until medium breakpoint</div>
+<div class="container-lg text-primary border">100% wide until large breakpoint</div>
+<div class="container-xl text-primary border">100% wide until extra large breakpoint</div>
+<div class="container-xxl text-primary border" >100% wide until extra extra large breakpoint</div>
+      {/* <MainCarousel /> */}
 
-      <MainCarousel />
-
-      <div
+      {/* <div
         style={{
           marginTop: 10,
 
@@ -324,7 +328,7 @@ const Home = () => {
         >
           POPULAR SEARCHS
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
